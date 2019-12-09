@@ -180,10 +180,13 @@ game.ball = {
 	},
 
 	bumbPlatform(platform) {
-		this.dy = -this.dy;
-		// координата касания с платформой
-		let touchX = this.x + this.width / 2;
-		this.dx = this.velocity * platform.getTochOffset(touchX);
+		// если мяч уже оттолкнулся, снова не выполняем
+		if (this.dy > 0) {
+			this.dy = -this.velocity;
+			// координата касания с платформой
+			let touchX = this.x + this.width / 2;
+			this.dx = this.velocity * platform.getTochOffset(touchX);
+		}
 	}
 };
 
