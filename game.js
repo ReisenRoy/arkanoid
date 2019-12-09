@@ -62,6 +62,7 @@ let game = {
 		for (let row = 0; row < this.rows; row++) {
 			for (let col = 0; col < this.cols; col++) {
 				this.blocks.push({
+					active: true,
 					width: 60,
 					height: 20,
 					x: 64 * col + 65,
@@ -75,13 +76,19 @@ let game = {
 		// реализация движения
 		this.platform.move();
 		this.ball.move();
+		this.collideBlocks();
+		this.collidePlatform();
+	},
 
+	collideBlocks() {
 		for (let block of this.blocks) {
-			if (this.ball.collide(block)) {
-				this.ball.bumbBlock(block);
-			}			
+			if (block.active && this.ball.collide(block)) {
+					this.ball.bumbBlock(block);
+			}
 		}
+	},
 
+	collidePlatform() {
 		if (this.ball.collide(this.platform)) {
 			this.ball.bumbPlatform(this.platform);
 		}
@@ -110,7 +117,9 @@ let game = {
 	
 	renderBlocks() {
 		for (let block of this.blocks) {
-			this.context.drawImage(this.sprites.block, block.x, block.y);
+			if (block.active) {
+				this.context.drawImage(this.sprites.block, block.x, block.y);
+			}
 		}
 	},
 
@@ -167,6 +176,7 @@ game.ball = {
 
 	bumbBlock(block) {
 		this.dy = -this.dy;
+		block.active = false;
 	},
 
 	bumbPlatform(platform) {
