@@ -76,6 +76,7 @@ let game = {
 		this.collideBlocks();
 		this.collidePlatform();
 		this.ball.collideWorldBounds();
+		this.platform.collideWorldBounds();
 		// реализация движения
 		this.platform.move();
 		this.ball.move();
@@ -267,6 +268,22 @@ game.platform = {
 		// значение координаты касания в частях (от 0 до 2)
 		let result = 2 * offset / this.width;
 		return result - 1
+	},
+
+	collideWorldBounds() {
+		let x = this.x + this.dx;
+
+		let platformLeft = x;
+		let platformRight = x + this.width;
+
+		let worldLeft = 0;
+		let worldRight = game.width;
+
+		if (platformLeft < worldLeft) {
+			this.stop();
+		} else if (platformRight > worldRight) {
+			this.stop();
+		}
 	}
 };
 
