@@ -210,6 +210,9 @@ game.ball = {
 	},
 
 	bumbPlatform(platform) {
+		if (platform.dx) {
+			this.x += platform.dx;
+		}
 		// если мяч уже оттолкнулся, снова не выполняем
 		if (this.dy > 0) {
 			this.dy = -this.velocity;
