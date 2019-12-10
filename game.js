@@ -279,9 +279,7 @@ game.platform = {
 		let worldLeft = 0;
 		let worldRight = game.width;
 
-		if (platformLeft < worldLeft) {
-			this.stop();
-		} else if (platformRight > worldRight) {
+		if (platformLeft < worldLeft || platformRight > worldRight) {
 			this.stop();
 		}
 	}
