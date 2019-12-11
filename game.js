@@ -146,10 +146,10 @@ let game = {
 
 		this.context.drawImage(this.sprites.background, 0, 0);
 		this.context.drawImage(this.sprites.ball,
-													 0, 0, 
-													 this.ball.width, this.ball.height, 
-													 this.ball.x, this.ball.y, 
-													 this.ball.width, this.ball.height);
+													this.ball.frame * this.ball.width, 0, 
+													this.ball.width, this.ball.height, 
+													this.ball.x, this.ball.y, 
+													this.ball.width, this.ball.height);
 		this.context.drawImage(this.sprites.platform, this.platform.x, this.platform.y);
 		this.renderBlocks();
 		this.context.fillText("Score: " + this.score, 15, 20);
@@ -186,6 +186,7 @@ let game = {
 game.ball = {
 	x: 320,
 	y: 280,
+	frame: 0,
 	width: 20,
 	height: 20,
 	dy: 0,
@@ -195,6 +196,14 @@ game.ball = {
 	start() {
 		this.dy = -this.velocity;
 		this.dx = game.random(-this.velocity, this.velocity);
+		this.animate();
+	},
+
+	animate() {
+		setInterval(() => {
+			++this.frame;
+			if(this.frame > 3) this.frame = 0;
+		}, 100);
 	},
 
 	move() {
