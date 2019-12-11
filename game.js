@@ -29,6 +29,12 @@ let game = {
 		// init (api for rendering)
 		this.context = document.getElementById("mycanvas").getContext("2d");
 		this.setEvents();
+		this.setTextFont();
+	},
+
+	setTextFont() {
+		this.context.fillStyle = "#FFFFFF";
+		this.context.font = "20px Arial";
 	},
 
 	setEvents() {
@@ -146,6 +152,7 @@ let game = {
 													 this.ball.width, this.ball.height);
 		this.context.drawImage(this.sprites.platform, this.platform.x, this.platform.y);
 		this.renderBlocks();
+		this.context.fillText("Score: " + this.score, 15, 20);
 	},
 	
 	renderBlocks() {
