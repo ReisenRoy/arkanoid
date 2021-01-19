@@ -1,1 +1,1 @@
-# [Play!](https://reisenroy.github.io/arkanoid/)
+# [Play!](https://kristinand.github.io/arkanoid/)
